@@ -5,3 +5,4 @@
 {% do consul.config.update({'retry_join': consul.config.retry_join or []}) %}
 {% set ipv4addr = salt['network.ipaddrs'](cidr='10.0.0.0/8')[0] or '127.0.0.1' %}
 {% do consul.config.update({'client_addr': ipv4addr}) %}
+{% do consul.config.update({'advertise': ipv4addr}) %}
