@@ -1,3 +1,4 @@
+{%- from "consul/map.jinja" import consul with context -%}
 [Unit]
 Description=consul
 Wants=network.target
@@ -8,7 +9,7 @@ Environment="GOMAXPROCS=2" "PATH=/usr/local/bin:/usr/bin:/bin"
 ExecStart=/usr/local/bin/consul agent -config-dir=/etc/consul.d
 ExecReload=/bin/kill -HUP $MAINPID
 KillSignal=TERM
-User=consul
+User={{ consul.user }}
 
 [Install]
 WantedBy=multi-user.target

@@ -12,34 +12,34 @@ consul-bin-dir:
 # Create consul user
 consul-user:
   group.present:
-    - name: consul
+    - name: {{ consul.user }}
   user.present: 
-    - name: consul
+    - name: {{ consul.user }}
     - createhome: false
     - system: true
     - groups:
-      - consul
+      - {{ consul.user }}
     - require:
-      - group: consul
+      - group: {{ consul.user }}
 
 # Create directories
 consul-config-dir:
   file.directory:
     - name: /etc/consul.d
-    - user: consul
-    - group: consul
+    - user: {{ consul.user }}
+    - group: {{ consul.user }}
 
 consul-runtime-dir:
   file.directory:
     - name: /var/consul
-    - user: consul
-    - group: consul
+    - user: {{ consul.user }}
+    - group: {{ consul.user }}
 
 consul-data-dir:
   file.directory:
     - name: /usr/local/share/consul
-    - user: consul
-    - group: consul
+    - user: {{ consul.user }}
+    - group: {{ consul.user }}
     - makedirs:
 
 # Install agent

@@ -15,6 +15,7 @@ consul-init-script:
     - name: /etc/init.d/consul
     - mode: 0755
     {% endif %}
+    - template: jinja
     {% if consul.service != False %}
     - watch_in:
        - service: consul

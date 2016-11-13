@@ -9,10 +9,10 @@ consul-config:
     - watch_in:
        - service: consul
     {% endif %}
-    - user: consul
-    - group: consul
+    - user: {{ consul.user }}
+    - group: {{ consul.user }}
     - require:
-      - user: consul
+      - user: {{ consul.user }}
 
 {% for script in consul.scripts %}
 consul-script-install-{{ loop.index }}:
@@ -20,8 +20,8 @@ consul-script-install-{{ loop.index }}:
     - source: {{ script.source }}
     - name: {{ script.name }}
     - template: jinja
-    - user: consul
-    - group: consul
+    - user: {{ consul.user }}
+    - group: {{ consul.user }}
     - mode: 0755
 {% endfor %}
 
@@ -34,7 +34,7 @@ consul-script-config:
     - watch_in:
        - service: consul
     {% endif %}
-    - user: consul
-    - group: consul
+    - user: {{ consul.user }}
+    - group: {{ consul.user }}
     - require:
-      - user: consul
+      - user: {{ consul.user }}
